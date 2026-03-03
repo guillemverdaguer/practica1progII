@@ -10,7 +10,6 @@ public class Parcela extends Allotjament {
 
         this.mida = mida;
         this.connexioElectrica = connexioElectrica;
-        "jesser cabron"
     }
 
     // Getters y setters
