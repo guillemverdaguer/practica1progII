@@ -10,6 +10,7 @@ public class Glamping extends Casa {
                     String mida, int numHabitacions, int capacitat,
                     String tipus, boolean casaMascota) {
 
+
         super(nom, id, estadaMinAlta, estadaMinBaixa,
                 mida, numHabitacions, capacitat);
 
