@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Camping implements InCamping{
     private String nomCamping_;
-    private ArrayList<Allotjament> llistaAllotjaments_;
+    private final ArrayList<Allotjament> llistaAllotjaments_;
     private ArrayList<Client> llistaClients_;
     private LlistaReserves llistaReserves_;
 
@@ -109,18 +109,18 @@ public class Camping implements InCamping{
     }
 
     public String getNomCamping() {
-        return nomCamping;
+        return nomCamping_;
     }
 
     public void setNomCamping(String nomCamping) {
-        this.nomCamping = nomCamping;
+        this.nomCamping_ = nomCamping;
     }
 
     public void setLlistaClients(ArrayList<Client> llistaClients) {
-        this.llistaClients = llistaClients;
+        this.llistaClients_ = llistaClients;
     }
 
     public void setLlistaReserves(LlistaReserves llistaReserves) {
-        this.llistaReserves = llistaReserves;
+        this.llistaReserves_ = llistaReserves;
     }
 }
