@@ -95,6 +95,8 @@ public interface InCamping {
                                int placesParquing, boolean terrassa, boolean tv, boolean aireFred,
                                boolean serveisExtra, String codiWifi);
 
+    void afegirBungalowPremium(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones, int placesParquing, boolean terrassa, boolean tv, boolean aireFred, boolean serveisExtra, boolean codiWifi);
+
     /**
      * Afegeix una casa glamping a la llista d'allotjaments.
      * @param material el material del que està fet.

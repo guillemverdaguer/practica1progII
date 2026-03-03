@@ -56,12 +56,15 @@ public class Camping implements InCamping{
 
     @Override
     public void afegirClient(String nom, String dni) {
+        Client client = new Client(nom, dni);
+        llistaClients_.add(client);
 
     }
 
     @Override
     public void afegirParcela(String nom_, String idAllotjament_, float metres, boolean connexioElectrica) {
-
+        Parcela parcela = new Parcela(nom_, idAllotjament_, metres, connexioElectrica);
+        llistaAllotjaments_.add(parcela);
     }
 
     @Override
@@ -85,12 +88,14 @@ public class Camping implements InCamping{
 
     @Override
     public void afegirMobilHome(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones, boolean terrassaBarbacoa) {
-
+        MobilHome mobilHome = new MobilHome(nom_, idAllotjament_, mida, habitacions, placesPersones, terrassaBarbacoa);
+        llistaAllotjaments_.add(mobilHome);
     }
 
     @Override
     public void afegirReserva(String id_, String dni_, LocalDate dataEntrada, LocalDate dataSortida) throws ExcepcioReserva {
-
+        Reserva reserva = new Reserva(id_, dni_, dataEntrada, dataSortida);
+        llistaAllotjaments_.add(reserva);
     }
 
     @Override
