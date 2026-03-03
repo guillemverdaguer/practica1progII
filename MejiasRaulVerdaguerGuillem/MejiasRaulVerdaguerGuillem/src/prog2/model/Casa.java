@@ -1,5 +1,5 @@
 package prog2.model;
-"nigga"
+"nigger"
 public class Casa extends Allotjament{
     private String mida;
     private int numHab;
