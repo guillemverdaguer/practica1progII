@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Camping implements InCamping{
     private String nomCamping_;
-    private ArrayList<Allotjament> llistaAllotjaments_;
+    private final ArrayList<Allotjament> llistaAllotjaments_;
     private ArrayList<Client> llistaClients_;
     private LlistaReserves llistaReserves_;
 
@@ -56,12 +56,15 @@ public class Camping implements InCamping{
 
     @Override
     public void afegirClient(String nom, String dni) {
+        Client client = new Client(nom, dni);
+        llistaClients_.add(client);
 
     }
 
     @Override
     public void afegirParcela(String nom_, String idAllotjament_, float metres, boolean connexioElectrica) {
-
+        Parcela parcela = new Parcela(nom_, idAllotjament_, metres, connexioElectrica);
+        llistaAllotjaments_.add(parcela);
     }
 
     @Override
@@ -85,12 +88,14 @@ public class Camping implements InCamping{
 
     @Override
     public void afegirMobilHome(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones, boolean terrassaBarbacoa) {
-
+        MobilHome mobilHome = new MobilHome(nom_, idAllotjament_, mida, habitacions, placesPersones, terrassaBarbacoa);
+        llistaAllotjaments_.add(mobilHome);
     }
 
     @Override
     public void afegirReserva(String id_, String dni_, LocalDate dataEntrada, LocalDate dataSortida) throws ExcepcioReserva {
-
+        Reserva reserva = new Reserva(id_, dni_, dataEntrada, dataSortida);
+        llistaAllotjaments_.add(reserva);
     }
 
     @Override
@@ -104,18 +109,18 @@ public class Camping implements InCamping{
     }
 
     public String getNomCamping() {
-        return nomCamping;
+        return nomCamping_;
     }
 
     public void setNomCamping(String nomCamping) {
-        this.nomCamping = nomCamping;
+        this.nomCamping_ = nomCamping;
     }
 
     public void setLlistaClients(ArrayList<Client> llistaClients) {
-        this.llistaClients = llistaClients;
+        this.llistaClients_ = llistaClients;
     }
 
     public void setLlistaReserves(LlistaReserves llistaReserves) {
-        this.llistaReserves = llistaReserves;
+        this.llistaReserves_ = llistaReserves;
     }
 }
