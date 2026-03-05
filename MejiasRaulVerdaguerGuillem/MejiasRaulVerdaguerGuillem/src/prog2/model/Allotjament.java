@@ -2,52 +2,73 @@ package prog2.model;
 
 import java.time.LocalDate;
 
-public class Allotjament implements InAllotjament{
+public abstract class Allotjament implements InAllotjament {
 
     private String nom;
     private String id;
+    private long estadaMinimaALTA;
+    private long estadaMinimaBAIXA;
 
-    public Allotjament(String nom, String id) {
-
+    public Allotjament(String nom, String id, long estadaMinimaALTA, long estadaMinimaBAIXA) {
         this.nom = nom;
         this.id = id;
+        this.estadaMinimaALTA = estadaMinimaALTA;
+        this.estadaMinimaBAIXA = estadaMinimaBAIXA;
     }
 
-    public static inAllotjament.Temp getTemporada(LocalDate data);
+    public static Temp getTemporada(LocalDate data) {
 
-    //getters i setters
+        int dia = data.getDayOfMonth();
+        int mes = data.getMonthValue();
+
+        if ((mes > 3 && mes < 9) ||
+                (mes == 3 && dia >= 21) ||
+                (mes == 9 && dia <= 20)) {
+
+            return Temp.ALTA;
+        } else {
+            return Temp.BAIXA;
+        }
+    }
+
+    // getters y setters
+
     @Override
     public String getNom() {
-        return "";
+        return nom;
     }
 
     @Override
     public void setNom(String nom) {
-
+        this.nom = nom;
     }
 
     @Override
     public String getId() {
-        return "";
+        return id;
     }
 
     @Override
     public void setId(String id) {
-
+        this.id = id;
     }
 
     @Override
     public long getEstadaMinima(Temp temp) {
-        return 0;
+
+        if (temp == Temp.ALTA) {
+            return estadaMinimaALTA;
+        } else {
+            return estadaMinimaBAIXA;
+        }
     }
 
     @Override
     public void setEstadaMinima(long estadaMinimaALTA_, long estadaMinimaBAIXA_) {
-
+        this.estadaMinimaALTA = estadaMinimaALTA_;
+        this.estadaMinimaBAIXA = estadaMinimaBAIXA_;
     }
 
     @Override
-    public boolean correcteFuncionament() {
-        return false;
-    }
+    public abstract boolean correcteFuncionament();
 }
