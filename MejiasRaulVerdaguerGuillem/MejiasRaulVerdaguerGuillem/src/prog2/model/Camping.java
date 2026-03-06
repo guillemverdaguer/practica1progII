@@ -5,18 +5,133 @@ import prog2.vista.ExcepcioReserva;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Camping implements InCamping{
-    private String nomCamping_;
-    private final ArrayList<Allotjament> llistaAllotjaments_;
-    private ArrayList<Client> llistaClients_;
-    private LlistaReserves llistaReserves_;
+public class Camping implements InCamping {
 
-    public Camping(String nomCamping_, ArrayList<Allotjament> llistaAllotjaments_, ArrayList<Client> llistaClients_, LlistaReserves llistaReserves_){
+    private String nomCamping;
+    private ArrayList<Allotjament> llistaAllotjaments;
+    private ArrayList<Client> llistaClients;
+    private LlistaReserves llistaReserves;
 
-        this.nomCamping_ = nomCamping_;
-        this.llistaAllotjaments_ = new ArrayList<>();
-        this.llistaClients_ = new ArrayList<>();
-        this.llistaReserves_ = new LlistaReserves();
+    public Camping(String nomCamping) {
+
+        this.nomCamping = nomCamping;
+        this.llistaAllotjaments = new ArrayList<>();
+        this.llistaClients = new ArrayList<>();
+        this.llistaReserves = new LlistaReserves();
+    }
+
+    @Override
+    public void afegirClient(String nom, String dni) {
+
+        Client client = new Client(nom, dni);
+        llistaClients.add(client);
+    }
+
+    @Override
+    public void afegirParcela(String nom, String id, float metres, boolean connexioElectrica) {
+
+        Parcela parcela = new Parcela(nom, id, 2, 4, metres, connexioElectrica);
+        llistaAllotjaments.add(parcela);
+    }
+
+    @Override
+    public void afegirBungalow(String nom, String id, String mida, int habitacions,
+                               int placesPersones, int placesParking,
+                               boolean terrassa, boolean televisio, boolean aireFred) {
+
+        Bungalow bungalow = new Bungalow(nom, id, 4, 7,
+                mida, habitacions, placesPersones,
+                placesParking, terrassa, televisio, aireFred);
+
+        llistaAllotjaments.add(bungalow);
+    }
+
+    @Override
+    public void afegirBungalowPremium(String nom, String id, String mida, int habitacions,
+                                      int placesPersones, int placesParking,
+                                      boolean terrassa, boolean televisio,
+                                      boolean aireFred, boolean llencols,
+                                      String wifi) {
+
+        BungalowPremium bungalowPremium = new BungalowPremium(nom, id, 4, 7, mida, habitacions, placesPersones,
+                placesParking, terrassa, televisio, aireFred, llencols, wifi);
+        llistaAllotjaments.add(bungalowPremium);
+    }
+
+    @Override
+    public void afegirBungalowPremium(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones, int placesParquing, boolean terrassa, boolean tv, boolean aireFred, boolean serveisExtra, boolean codiWifi) {
+
+    }
+
+    @Override
+    public void afegirGlamping(String nom, String id, String mida, int habitacions,
+                               int placesPersones, String tipus, boolean casaMascota) {
+
+        Glamping glamping = new Glamping(nom, id, 3, 3,
+                mida, habitacions, placesPersones,
+                tipus, casaMascota);
+
+        llistaAllotjaments.add(glamping);
+    }
+
+    @Override
+    public void afegirMobilHome(String nom, String id, String mida, int habitacions,
+                                int placesPersones, boolean terrassaBarbacoa) {
+
+        MobilHome mobilHome = new MobilHome(nom, id, 3, 5,
+                mida, habitacions, placesPersones,
+                terrassaBarbacoa);
+
+        llistaAllotjaments.add(mobilHome);
+    }
+
+    private Allotjament buscarAllotjament(String id) {
+
+        for (Allotjament allotjament : llistaAllotjaments) {
+
+            if (allotjament.getId().equals(id)) {
+                return allotjament;
+            }
+        }
+
+        return null;
+    }
+
+    private Client buscarClient(String dni) {
+
+        for (Client client : llistaClients) {
+
+            if (client.getDni().equals(dni)) {
+                return client;
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public void afegirReserva(String id, String dni,
+                              LocalDate dataEntrada,
+                              LocalDate dataSortida) throws ExcepcioReserva {
+
+        Allotjament allotjament = buscarAllotjament(id);
+        Client client = buscarClient(dni);
+
+        if (allotjament == null || client == null) {
+            return;
+        }
+
+        llistaReserves.afegirReserva(allotjament, client, dataEntrada, dataSortida);
+    }
+
+    @Override
+    public int calculAllotjamentsOperatius() {
+        return 0;
+    }
+
+    @Override
+    public Allotjament getAllotjamentEstadaMesCurta(InAllotjament.Temp temp) {
+        return null;
     }
 
     @Override
@@ -41,7 +156,7 @@ public class Camping implements InCamping{
 
     @Override
     public int getNumAllotjaments() {
-        return 0;
+        return llistaAllotjaments.size();
     }
 
     @Override
@@ -55,72 +170,17 @@ public class Camping implements InCamping{
     }
 
     @Override
-    public void afegirClient(String nom, String dni) {
-        Client client = new Client(nom, dni);
-        llistaClients_.add(client);
+    public int getNumAllotjamentsOperatius() {
 
-    }
+        int count = 0;
 
-    @Override
-    public void afegirParcela(String nom_, String idAllotjament_, float metres, boolean connexioElectrica) {
-        Parcela parcela = new Parcela(nom_, idAllotjament_, metres, connexioElectrica);
-        llistaAllotjaments_.add(parcela);
-    }
+        for (Allotjament allotjament : llistaAllotjaments) {
 
-    @Override
-    public void afegirBungalow(String nom_, String idAllotjament_, String mida, int habitacions,
-                               int placesPersones, int placesParquing, boolean terrassa, boolean tv, boolean aireFred) {
-        Bungalow bungalow = new Bungalow(nom_, idAllotjament_, mida, habitacions, placesPersones, placesParquing, terrassa, tv, aireFred);
-        llistaAllotjaments_.add(bungalow);
-    }
+            if (allotjament.correcteFuncionament()) {
+                count++;
+            }
+        }
 
-    @Override
-    public void afegirBungalowPremium(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones, int placesParquing, boolean terrassa, boolean tv, boolean aireFred, boolean serveisExtra, boolean codiWifi) {
-        BungalowPremium bungalowPremium = new BungalowPremium(nom_, idAllotjament_, mida, habitacions, placesPersones, placesParquing, terrassa, tv, aireFred, serveisExtra, codiWifi);
-        llistaAllotjaments_.add(bungalowPremium);
-    }
-
-    @Override
-    public void afegirGlamping(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones, String material, boolean casaMascota) {
-        Glamping glamping = new Glamping(nom_, idAllotjament_, mida, habitacions, placesPersones, material, casaMascota);
-        llistaAllotjaments_.add(glamping);
-    }
-
-    @Override
-    public void afegirMobilHome(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones, boolean terrassaBarbacoa) {
-        MobilHome mobilHome = new MobilHome(nom_, idAllotjament_, mida, habitacions, placesPersones, terrassaBarbacoa);
-        llistaAllotjaments_.add(mobilHome);
-    }
-
-    @Override
-    public void afegirReserva(String id_, String dni_, LocalDate dataEntrada, LocalDate dataSortida) throws ExcepcioReserva {
-        Reserva reserva = new Reserva(id_, dni_, dataEntrada, dataSortida);
-        llistaAllotjaments_.add(reserva);
-    }
-
-    @Override
-    public int calculAllotjamentsOperatius() {
-        return 0;
-    }
-
-    @Override
-    public Allotjament getAllotjamentEstadaMesCurta(InAllotjament.Temp temp) {
-        return null;
-    }
-
-    public String getNomCamping() {
-        return nomCamping_;
-    }
-
-    public void setNomCamping(String nomCamping) {
-        this.nomCamping_ = nomCamping;
-    }
-
-    public void setLlistaClients(ArrayList<Client> llistaClients) {
-        this.llistaClients_ = llistaClients;
-    }
-
-    public void setLlistaReserves(LlistaReserves llistaReserves) {
-        this.llistaReserves_ = llistaReserves;
+        return count;
     }
 }

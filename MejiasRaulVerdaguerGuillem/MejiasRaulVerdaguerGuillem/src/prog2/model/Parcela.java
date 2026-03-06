@@ -1,24 +1,26 @@
 package prog2.model;
 
 public class Parcela extends Allotjament {
-    private int mida;
+
+    private float metres;
     private boolean connexioElectrica;
 
-    public Parcela(String nom, String id, int mida, boolean connexioElectrica) {
+    public Parcela(String nom, String id,
+                   long estadaMinimaALTA, long estadaMinimaBAIXA,
+                   float metres, boolean connexioElectrica) {
 
-        super(nom, id);
+        super(nom, id, estadaMinimaALTA, estadaMinimaBAIXA);
 
-        this.mida = mida;
+        this.metres = metres;
         this.connexioElectrica = connexioElectrica;
     }
 
-    // Getters y setters
-    public double getMida() {
-        return mida;
+    public float getMetres() {
+        return metres;
     }
 
-    public void setMida(double mida) {
-        this.mida = mida;
+    public void setMetres(float metres) {
+        this.metres = metres;
     }
 
     public boolean isConnexioElectrica() {
@@ -29,7 +31,6 @@ public class Parcela extends Allotjament {
         this.connexioElectrica = connexioElectrica;
     }
 
-    // Funcionamiento correcto
     @Override
     public boolean correcteFuncionament() {
         return connexioElectrica;
@@ -37,11 +38,13 @@ public class Parcela extends Allotjament {
 
     @Override
     public String toString() {
-        return super.toString() +
-                " Parcela{mida=" + mida +
-                ", connexioElectrica=" + connexioElectrica + "}";
+        return "Nom=" + getNom() +
+                ", Id=" + getId() +
+                ", estada mínima en temp ALTA: " + getEstadaMinima(Temp.ALTA) +
+                ", estada mínima en temp BAIXA: " + getEstadaMinima(Temp.BAIXA) +
+                ". Parcela{" +
+                "mida=" + metres +
+                ", connexioElectrica=" + connexioElectrica +
+                '}';
     }
 }
-
-
-

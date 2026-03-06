@@ -1,33 +1,55 @@
 package prog2.model;
 
 public class BungalowPremium extends Bungalow {
-    private boolean tovalloles;
-    private boolean wifi;
+
+    private boolean llencolsTovalloles;
+    private String codiWifi;
 
     public BungalowPremium(String nom, String id,
-                    String mida, int numHab, int capacitat,
-                    int placesParking, boolean terrassa,
-                    boolean televisio, boolean aireFred, boolean tovalloles, boolean wifi) {
+                           long estadaMinimaALTA, long estadaMinimaBAIXA,
+                           String mida, int habitacions, int placesPersones,
+                           int placesParking, boolean terrassa,
+                           boolean televisio, boolean aireFred,
+                           boolean llencolsTovalloles, String codiWifi) {
 
-        super(nom, id, mida, numHab, capacitat, placesParking,  terrassa, televisio, aireFred);
+        super(nom, id, estadaMinimaALTA, estadaMinimaBAIXA, mida, habitacions, placesPersones, placesParking, terrassa, televisio, aireFred);
 
-        this.tovalloles = tovalloles;
-        this.wifi = wifi;
+        this.llencolsTovalloles = llencolsTovalloles;
+        this.codiWifi = codiWifi;
     }
 
-    public boolean isTovalloles() {
-        return tovalloles;
+    public boolean isLlencolsTovalloles() {
+        return llencolsTovalloles;
     }
 
-    public void setTovalloles(boolean tovalloles) {
-        this.tovalloles = tovalloles;
+    public void setLlencolsTovalloles(boolean llencolsTovalloles) {
+        this.llencolsTovalloles = llencolsTovalloles;
     }
 
-    public boolean isWifi() {
-        return wifi;
+    public String getCodiWifi() {
+        return codiWifi;
     }
 
-    public void setWifi(boolean wifi) {
-        this.wifi = wifi;
+    public void setCodiWifi(String codiWifi) {
+        this.codiWifi = codiWifi;
+    }
+
+    @Override
+    public boolean correcteFuncionament() {
+
+        boolean wifiValid = codiWifi != null &&
+                codiWifi.length() >= 8 &&
+                codiWifi.length() <= 16;
+
+        return isAireFred() && wifiValid;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                " BungalowPremium{" +
+                "llencolsTovalloles=" + llencolsTovalloles +
+                ", codiWifi='" + codiWifi + '\'' +
+                '}';
     }
 }

@@ -2,23 +2,21 @@ package prog2.model;
 
 public class Glamping extends Casa {
 
-    private String tipus; // "tela" o "fusta"
+    private String tipus; // tela o fusta
     private boolean casaMascota;
 
-    // Constructor
     public Glamping(String nom, String id,
-                    String mida, int numHabitacions, int capacitat,
+                    long estadaMinimaALTA, long estadaMinimaBAIXA,
+                    String mida, int habitacions, int placesPersones,
                     String tipus, boolean casaMascota) {
 
-
-        super(nom, id, estadaMinAlta, estadaMinBaixa,
-                mida, numHabitacions, capacitat);
+        super(nom, id, estadaMinimaALTA, estadaMinimaBAIXA,
+                mida, habitacions, placesPersones);
 
         this.tipus = tipus;
         this.casaMascota = casaMascota;
     }
 
-    // Getters y setters
     public String getTipus() {
         return tipus;
     }
@@ -35,7 +33,6 @@ public class Glamping extends Casa {
         this.casaMascota = casaMascota;
     }
 
-    // Funcionamient correcte
     @Override
     public boolean correcteFuncionament() {
         return casaMascota;
@@ -44,7 +41,9 @@ public class Glamping extends Casa {
     @Override
     public String toString() {
         return super.toString() +
-                " Glamping{tipus=" + tipus +
-                ", casaMascota=" + casaMascota + "}";
+                " Glamping{" +
+                "tipus='" + tipus + '\'' +
+                ", casaMascota=" + casaMascota +
+                '}';
     }
 }

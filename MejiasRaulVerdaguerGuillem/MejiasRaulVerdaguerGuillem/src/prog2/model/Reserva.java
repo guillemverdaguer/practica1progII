@@ -9,7 +9,6 @@ public class Reserva {
     private LocalDate dataEntrada;
     private LocalDate dataSortida;
 
-    // Constructor
     public Reserva(Allotjament allotjament, Client client,
                    LocalDate dataEntrada, LocalDate dataSortida) {
 
@@ -19,7 +18,6 @@ public class Reserva {
         this.dataSortida = dataSortida;
     }
 
-    // Getters
     public Allotjament getAllotjament() {
         return allotjament;
     }
@@ -36,13 +34,29 @@ public class Reserva {
         return dataSortida;
     }
 
+    public void setAllotjament(Allotjament allotjament) {
+        this.allotjament = allotjament;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public void setDataEntrada(LocalDate dataEntrada) {
+        this.dataEntrada = dataEntrada;
+    }
+
+    public void setDataSortida(LocalDate dataSortida) {
+        this.dataSortida = dataSortida;
+    }
+
     @Override
     public String toString() {
         return "Reserva{" +
                 "allotjament=" + allotjament.getId() +
                 ", client=" + client.getNom() +
-                ", dataEntrada=" + dataEntrada +
-                ", dataSortida=" + dataSortida +
+                ", entrada=" + dataEntrada +
+                ", sortida=" + dataSortida +
                 '}';
     }
 }

@@ -1,18 +1,19 @@
 package prog2.model;
 
-public class Casa extends Allotjament{
+public abstract class Casa extends Allotjament {
+
     private String mida;
-    private int numHab;
-    private int capacitat;
+    private int habitacions;
+    private int placesPersones;
 
-    public Casa(String nom, String id, String mida, int numHab, int capacitat) {
+    public Casa(String nom, String id, long estadaMinimaALTA, long estadaMinimaBAIXA,
+                String mida, int habitacions, int placesPersones) {
 
-        super(nom, id);
+        super(nom, id, estadaMinimaALTA, estadaMinimaBAIXA);
 
         this.mida = mida;
-        this.numHab = numHab;
-        this.capacitat = capacitat;
-
+        this.habitacions = habitacions;
+        this.placesPersones = placesPersones;
     }
 
     public String getMida() {
@@ -23,19 +24,29 @@ public class Casa extends Allotjament{
         this.mida = mida;
     }
 
-    public int getNumHab() {
-        return numHab;
+    public int getHabitacions() {
+        return habitacions;
     }
 
-    public void setNumHab(int numHab) {
-        this.numHab = numHab;
+    public void setHabitacions(int habitacions) {
+        this.habitacions = habitacions;
     }
 
-    public int getCapacitat() {
-        return capacitat;
+    public int getPlacesPersones() {
+        return placesPersones;
     }
 
-    public void setCapacitat(int capacitat) {
-        this.capacitat = capacitat;
+    public void setPlacesPersones(int placesPersones) {
+        this.placesPersones = placesPersones;
+    }
+
+    @Override
+    public String toString() {
+        return super.getNom() + " (" + super.getId() + ") " +
+                "Casa{" +
+                "mida='" + mida + '\'' +
+                ", habitacions=" + habitacions +
+                ", placesPersones=" + placesPersones +
+                '}';
     }
 }

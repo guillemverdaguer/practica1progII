@@ -18,7 +18,6 @@ public class ReservaTest {
 
     @BeforeEach
     public void setUp() throws ExcepcioReserva {
-        // Inicialitzem els objectes necessaris per a les proves
         allotjament =  new Parcela("Parcela A", "P1", 50.0f, true);
         client = new Client("Laura", "123456789");
 
@@ -33,7 +32,7 @@ public class ReservaTest {
     @Test
     public void testReservaConstructor() {
         // Comprovem que el constructor ha assignat correctament els valors
-        assertEquals(allotjament, reserva.getAllotjament_());
+        assertEquals(allotjament, reserva.getAllotjament());
         assertEquals(client, reserva.getClient());
         assertEquals(dataEntrada, reserva.getDataEntrada());
         assertEquals(dataSortida, reserva.getDataSortida());
