@@ -28,9 +28,6 @@ public class Client {
 
     @Override
     public String toString() {
-        return "Client{" +
-                "nom='" + nom + '\'' +
-                ", dni='" + dni + '\'' +
-                '}';
+        return nom + " amb DNI: " + dni + ". ";
     }
 }

@@ -20,6 +20,10 @@ public class Camping implements InCamping {
         this.llistaReserves = new LlistaReserves();
     }
 
+    public static InAllotjament.Temp getTemporada(LocalDate data) {
+        return null;
+    }
+
     @Override
     public void afegirClient(String nom, String dni) {
 
