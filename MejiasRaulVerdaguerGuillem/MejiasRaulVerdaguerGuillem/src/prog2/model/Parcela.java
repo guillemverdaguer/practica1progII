@@ -1,26 +1,27 @@
 package prog2.model;
 
+import java.lang.String;
+
 public class Parcela extends Allotjament {
 
-    private float metres;
+    private float mida;
     private boolean connexioElectrica;
 
     public Parcela(String nom, String id,
-                   long estadaMinimaALTA, long estadaMinimaBAIXA,
-                   float metres, boolean connexioElectrica) {
+                   float mida, boolean connexioElectrica) {
 
-        super(nom, id, estadaMinimaALTA, estadaMinimaBAIXA);
+        super(nom, id, 2, 4);
 
-        this.metres = metres;
+        this.mida = mida;
         this.connexioElectrica = connexioElectrica;
     }
 
-    public float getMetres() {
-        return metres;
+    public float getMida() {
+        return mida;
     }
 
-    public void setMetres(float metres) {
-        this.metres = metres;
+    public void setMida(float mida) {
+        this.mida = mida;
     }
 
     public boolean isConnexioElectrica() {
@@ -43,7 +44,7 @@ public class Parcela extends Allotjament {
                 ", estada mínima en temp ALTA: " + getEstadaMinima(Temp.ALTA) +
                 ", estada mínima en temp BAIXA: " + getEstadaMinima(Temp.BAIXA) +
                 ". Parcela{" +
-                "mida=" + metres +
+                "mida=" + mida +
                 ", connexioElectrica=" + connexioElectrica +
                 '}';
     }

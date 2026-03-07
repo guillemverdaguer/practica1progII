@@ -20,7 +20,7 @@ public class LlistaReservesTest {
     public void setUp() {
         // Inicialització dels objectes necessaris abans de cada prova
         llistaReserves = new LlistaReserves();
-        allotjament = new Parcela("Parcela A", "P001", 50.0f, true);
+        allotjament = new Parcela("Parcela A", "P001",50.0f, true);
         client = new Client("Client1", "123456789");
         dataEntrada = LocalDate.of(2026, 5, 15);
         dataSortida = LocalDate.of(2026, 5, 20);

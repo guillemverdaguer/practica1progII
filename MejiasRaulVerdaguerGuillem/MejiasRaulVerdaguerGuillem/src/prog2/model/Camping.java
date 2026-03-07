@@ -30,8 +30,9 @@ public class Camping implements InCamping {
     @Override
     public void afegirParcela(String nom, String id, float metres, boolean connexioElectrica) {
 
-        Parcela parcela = new Parcela(nom, id, 2, 4, metres, connexioElectrica);
+        Parcela parcela = new Parcela(nom, id, metres, connexioElectrica);
         llistaAllotjaments.add(parcela);
+
     }
 
     @Override
@@ -172,15 +173,15 @@ public class Camping implements InCamping {
     @Override
     public int getNumAllotjamentsOperatius() {
 
-        int count = 0;
+        int comptador = 0;
 
         for (Allotjament allotjament : llistaAllotjaments) {
 
             if (allotjament.correcteFuncionament()) {
-                count++;
+                comptador++;
             }
         }
 
-        return count;
+        return comptador;
     }
 }
