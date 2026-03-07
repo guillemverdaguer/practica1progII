@@ -21,7 +21,18 @@ public class Camping implements InCamping {
     }
 
     public static InAllotjament.Temp getTemporada(LocalDate data) {
-        return null;
+
+        int dia = data.getDayOfMonth();
+        int mes = data.getMonthValue();
+
+        if ((mes > 3 && mes < 9) ||
+                (mes == 3 && dia >= 21) ||
+                (mes == 9 && dia <= 20)) {
+
+            return InAllotjament.Temp.ALTA;
+        }
+
+        return InAllotjament.Temp.BAIXA;
     }
 
     @Override
@@ -122,8 +133,11 @@ public class Camping implements InCamping {
         Allotjament allotjament = buscarAllotjament(id);
         Client client = buscarClient(dni);
 
-        if (allotjament == null || client == null) {
-            return;
+        if (allotjament == null) {
+            throw new ExcepcioReserva("L'allotjament amb id " + id + " no existeix");
+        }
+        if (client == null) {
+            throw new ExcepcioReserva("El client amb DNI "+ dni + " no existeix");
         }
 
         llistaReserves.afegirReserva(allotjament, client, dataEntrada, dataSortida);
@@ -131,32 +145,55 @@ public class Camping implements InCamping {
 
     @Override
     public int calculAllotjamentsOperatius() {
-        return 0;
+
+        int comptador = 0;
+
+        for (Allotjament a : llistaAllotjaments) {
+            if (a.correcteFuncionament()) {
+                comptador++;
+            }
+        }
+
+        return comptador;
     }
 
     @Override
     public Allotjament getAllotjamentEstadaMesCurta(InAllotjament.Temp temp) {
-        return null;
+
+        if (llistaAllotjaments.isEmpty()) {
+            return null;
+        }
+
+        Allotjament millor = llistaAllotjaments.get(0);
+
+        for (Allotjament allotjament : llistaAllotjaments) {
+
+            if (allotjament.getEstadaMinima(temp) < millor.getEstadaMinima(temp)) {
+                millor = allotjament;
+            }
+        }
+
+        return millor;
     }
 
     @Override
     public String getNom() {
-        return "";
+        return nomCamping;
     }
 
     @Override
     public LlistaReserves getLlistaReserves() {
-        return null;
+        return llistaReserves;
     }
 
     @Override
     public ArrayList<Allotjament> getLlistaAllotjaments() {
-        return null;
+        return llistaAllotjaments;
     }
 
     @Override
     public ArrayList<Client> getLlistaClients() {
-        return null;
+        return llistaClients;
     }
 
     @Override
@@ -166,12 +203,12 @@ public class Camping implements InCamping {
 
     @Override
     public int getNumReserves() {
-        return 0;
+        return llistaReserves.getReserves().size();
     }
 
     @Override
     public int getNumClients() {
-        return 0;
+        return llistaClients.size();
     }
 
     @Override

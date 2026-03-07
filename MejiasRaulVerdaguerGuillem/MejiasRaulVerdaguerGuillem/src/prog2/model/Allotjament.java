@@ -72,4 +72,12 @@ public abstract class Allotjament implements InAllotjament {
 
     @Override
     public abstract boolean correcteFuncionament();
+
+
+    @Override
+    public String toString() {
+        return "Nom=" + getNom() + ", Id=" + getId() +
+                ", estada mínima en temp ALTA: " + getEstadaMinima(Temp.ALTA) +
+                ", estada mínima en temp BAIXA: " + getEstadaMinima(Temp.BAIXA) + ".";
+    }
 }
